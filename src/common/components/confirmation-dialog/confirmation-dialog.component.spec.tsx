@@ -5,7 +5,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 import { Dialog } from '@mui/material';
 import { TableComponent } from '../table/table.component';
 
-describe('ConfirmationDialogComponent', () => {
+describe('ConfirmationDialogComponent specs', () => {
   it('should render the component dialog when isOpen is true', () => {
     render(
       <ConfirmationDialogComponent
