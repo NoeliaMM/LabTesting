@@ -32,7 +32,7 @@ export const ConfirmationDialogComponent: React.FunctionComponent<Props> = (
   };
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} data-testid="confirmation-dialog">
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
       <DialogActions>
