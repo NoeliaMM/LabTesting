@@ -38,7 +38,8 @@ describe('Submodule List spec', () => {
     const employeePanel = 'Empleados';
 
     // Act
-    cy.get('a').contains(employeePanel).click();
+       cy.findByRole('link', { name: employeePanel }).as('employeePanel');
+    cy.get('@employeePanel').click();
 
     // Assert
     cy.url().should('equal', 'http://localhost:3000/#/employees');
