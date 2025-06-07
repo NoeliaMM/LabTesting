@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "isActive": true,
+    "name": "Daniel Perez",
+    "email": "daniel.perez@example.com",
+    "lastDateIncurred": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": "2",
+    "isActive": true,
+    "name": "Maria Gomez",
+    "email": "maria.gomez@example.com",
+    "lastDateIncurred": "2023-10-01T12:00:00Z"
+  }
+]
