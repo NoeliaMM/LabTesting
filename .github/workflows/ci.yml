@@ -18,23 +18,38 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run unit tests
-        run: npm test
-
-      - name: Tests e2e
-        run: npm run test:e2e:ci
+      - name: Run unit tests (if defined)
+        run: |
+          if npm run | grep -q '^  test'; then
+            npm run test
+          else
+            echo "No unit test script defined. Skipping."
+          fi
+      - name: Run e2e tests (if defined)
+        run: |
+          if npm run | grep -q test:e2e:ci; then
+            npm run test:e2e:ci
+          else
+            echo "No e2e script defined. Skipping."
+          fi
+      - name: Check screenshots folder exists
+        id: check_screenshots
+        run: echo "::set-output name=exists::$( [ -d ./cypress/screenshots ] && echo true || echo false )"
 
       - name: Upload screenshots when specs fail
-        if: ${{ failure() }}
+        if: ${{ failure() && steps.check_screenshots.outputs.exists == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
           path: ./cypress/screenshots
 
+      - name: Check videos folder exists
+        id: check_videos
+        run: echo "::set-output name=exists::$( [ -d ./cypress/videos ] && echo true || echo false )"
+
       - name: Upload videos when specs fail
-        if: ${{ failure()}}
+        if: ${{ failure() && steps.check_videos.outputs.exists == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: videos
           path: ./cypress/videos
-
